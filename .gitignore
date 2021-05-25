@@ -29,6 +29,9 @@ build/
 local.properties
 *.iml
 keystore.properties
+upload_certificate.pem
+index.android.bundle
+
 
 # node.js
 #

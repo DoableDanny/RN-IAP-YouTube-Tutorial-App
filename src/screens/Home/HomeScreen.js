@@ -1,15 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-
 import Button from '../../lib/components/Button';
-import useInAppPurchase from '../../lib/custom hooks/useInAppPurchase';
+import useInAppPurchase from '../../lib/custom_hooks/useInAppPurchase';
 
 const HomeScreen = () => {
-  const {
-    isFullAppPurchased,
-    connectionErrorMsg,
-    purchaseFullApp,
-  } = useInAppPurchase();
+  const {isFullAppPurchased, connectionErrorMsg, purchaseFullApp} =
+    useInAppPurchase();
 
   return (
     <View style={styles.container}>
@@ -39,5 +35,4 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
 });
-
 export default HomeScreen;

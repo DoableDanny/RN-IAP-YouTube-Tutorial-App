@@ -8,7 +8,6 @@ const Button = ({title, handlePress}) => {
     </TouchableOpacity>
   );
 };
-
 const styles = StyleSheet.create({
   btn: {
     borderRadius: 12,
@@ -24,5 +23,4 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-
 export default Button;

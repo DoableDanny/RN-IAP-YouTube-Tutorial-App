@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 export const STORAGE_KEYS = {
   IS_FULL_APP_PURCHASED: '@is_full_app_purchased',
 };

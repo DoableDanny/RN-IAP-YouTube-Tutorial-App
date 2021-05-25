@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 import {requestPurchase, useIAP} from 'react-native-iap';
-
 import {
   STORAGE_KEYS,
   storeBooleanData,
@@ -31,7 +30,6 @@ const useInAppPurchase = () => {
   // Get data after initial render
   useEffect(() => {
     getBooleanData(IS_FULL_APP_PURCHASED).then((data) => {
-      console.log('isFullAppPurchased: ', data);
       setIsFullAppPurchased(data);
     });
   }, []);
@@ -42,7 +40,6 @@ const useInAppPurchase = () => {
       getProducts(itemSKUs);
       console.log('Getting products...');
     }
-
     console.log(products);
   }, [connected, getProducts]);
 
@@ -51,13 +48,10 @@ const useInAppPurchase = () => {
     const checkCurrentPurchase = async (purchase) => {
       if (purchase) {
         const receipt = purchase.transactionReceipt;
-
         console.log('RECEIPT: ', receipt);
-
         if (receipt) {
           // Give full app access
           setAndStoreFullAppPurchase(true);
-
           try {
             const ackResult = await finishTransaction(purchase);
             console.log('ackResult: ', ackResult);
@@ -68,11 +62,10 @@ const useInAppPurchase = () => {
         }
       }
     };
-
     checkCurrentPurchase(currentPurchase);
   }, [currentPurchase, finishTransaction]);
 
-  // If user reinstalls app, then they can press purchase btn (SettingsScreen) to get full app without paying again.
+  // If user reinstalls app, then they can press purchase btn (SettingsScreen)  to getfull app without paying again.
   useEffect(() => {
     if (currentPurchaseError) {
       if (
@@ -85,10 +78,12 @@ const useInAppPurchase = () => {
   }, [currentPurchaseError]);
 
   const purchaseFullApp = async () => {
+    // Reset error msg
+    if (connectionErrorMsg !== '') setConnectionErrorMsg('');
     if (!connected) {
       setConnectionErrorMsg('Please check your internet connection');
     }
-    // If we are connected & have products, purchase the item. Google will handle if user has no internet here.
+    // If we are connected & have products, purchase the item. Gohas no inteogle will handle if user rnet here.
     else if (products?.length > 0) {
       requestPurchase(itemSKUs[1]);
       console.log('Purchasing products...');
@@ -110,8 +105,6 @@ const useInAppPurchase = () => {
   const setAndStoreFullAppPurchase = (boolean) => {
     setIsFullAppPurchased(boolean);
     storeBooleanData(IS_FULL_APP_PURCHASED, boolean);
-
-    console.log(`Set and stored full app purchase: `, boolean);
   };
 
   return {
